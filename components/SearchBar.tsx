@@ -1,14 +1,15 @@
-import { Input } from "@nextui-org/input";
-import { SearchIcon } from "./icons";
+"use client";
+import SBInput from "./atoms/SBInput";
 
 const SearchBar = () => {
 	return (
 		<div className="w-full">
-			<Input
-				startContent={<SearchIcon />}
-				className="max-w-md mx-auto"
-				placeholder="Search..."
-			/>
+			{/* <SBInput */}
+			{/* 	name="search" */}
+			{/* 	label="Search" */}
+			{/* 	className="max-w-md mx-auto" */}
+			{/* 	placeholder="Search..." */}
+			{/* /> */}
 		</div>
 	);
 };
