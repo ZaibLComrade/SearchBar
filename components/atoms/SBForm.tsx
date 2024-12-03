@@ -1,10 +1,11 @@
+"use client"
 import {ReactNode} from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 
 interface IProps {
 	children: ReactNode;
 	defaultValues?: Record<string, unknown>;
-	className: string;
+	className?: string;
 	onSubmit: SubmitHandler<any>;
 	resolver?: any;
 }

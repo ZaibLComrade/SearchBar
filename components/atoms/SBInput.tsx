@@ -6,28 +6,23 @@ import { useFormContext } from "react-hook-form";
 interface IProps {
 	name: string;
 	variant?: "flat" | "bordered" | "faded" | "underlined";
-	label: ReactNode | string;
+	label?: ReactNode | string;
 	className: string;
-	placeholder: string;
+	placeholder?: string;
 	isVisible?: boolean;
+	startContent?: any;
 }
 
 const SBInput = ({
 	name,
-	variant = "flat",
-	label,
-	className = "",
-	placeholder = "",
 	isVisible = true,
+	...props
 }: IProps) => {
 	const { register } = useFormContext();
 	return (
 		<Input
+			{ ...props }
 			{...register(name)}
-			label={label}
-			variant={variant}
-			className={className}
-			placeholder={placeholder}
 			type={isVisible ? "text" : "password"}
 		/>
 	);
