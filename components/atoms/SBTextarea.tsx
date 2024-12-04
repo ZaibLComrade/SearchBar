@@ -1,5 +1,6 @@
 "use client";
-import { Input } from "@nextui-org/input";
+
+import { Textarea } from "@nextui-org/input";
 import { ReactNode } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -11,21 +12,14 @@ interface IProps {
 	placeholder?: string;
 	isVisible?: boolean;
 	startContent?: any;
+	row?: number;
+	col?: number;
 }
 
-const SBInput = ({
-	name,
-	isVisible = true,
-	...props
-}: IProps) => {
+const SBTextarea = ({ name, ...props }: IProps) => {
 	const { register } = useFormContext();
-	return (
-		<Input
-			{ ...props }
-			{...register(name)}
-			type={isVisible ? "text" : "password"}
-		/>
-	);
+
+	return <Textarea {...props} {...register(name)} />;
 };
 
-export default SBInput;
+export default SBTextarea;
