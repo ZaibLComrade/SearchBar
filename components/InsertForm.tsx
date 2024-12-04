@@ -7,7 +7,7 @@ import { Button } from "@nextui-org/button";
 import { config } from "@/config";
 
 const InsertForm = () => {
-	const onSubmit: SubmitHandler<any> = async (data) => {
+	const onSubmit: SubmitHandler<any> = async (data, event) => {
 		const response = await fetch(
 			`${config.server_url}/api/search`,
 			{
@@ -17,6 +17,7 @@ const InsertForm = () => {
 		);
 		const result = await response.json();
 		console.log(result);
+		event?.target.reset();
 	};
 
 	return (

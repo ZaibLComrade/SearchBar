@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createSearchIndex, deleteAllDocs, getSearchData } from "../modules/meilisearch";
+import { createSearchIndex, getSearchData } from "../modules/meilisearch";
 import crypto from "crypto";
 
 export const POST = async (req: NextRequest) => {
@@ -11,6 +11,7 @@ export const POST = async (req: NextRequest) => {
 
 	return NextResponse.json({
 		success: true,
+		successCode: 200,
 		message: "Successfully posted data",
 		data: res,
 	});
@@ -20,19 +21,19 @@ export const GET = async (req: NextRequest) => {
 	const searchParams = await req.nextUrl.searchParams;
 	const query = searchParams.get("q");
 	const res = await getSearchData("items", query);
+	
+	if(res.hits.length <= 0) return NextResponse.json({
+		success: false,
+		statusCode: 404,
+		message: "Data not found",
+	})
 
 	return NextResponse.json({
 		success: true,
+		statusCode: 200,
 		message: "Data fetched successfully",
-		data: res,
+		data: res.hits,
 	});
 };
 
-export const DELETE = async () => {
-	const res = await deleteAllDocs("items");
-	return NextResponse.json({
-		success: true,
-		message: "Data deleted successfully",
-		data: res,
-	})
-}
+
