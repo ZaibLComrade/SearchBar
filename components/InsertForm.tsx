@@ -9,14 +9,10 @@ import { config } from "@/config";
 const InsertForm = () => {
 	const onSubmit: SubmitHandler<any> = async (data) => {
 		const response = await fetch(
-			`${config.server_url}/api/search/add-index`,
+			`${config.server_url}/api/search`,
 			{
 				method: "POST",
-				body: data,
-				headers: new Headers({
-					"Content-Type": "application/json",
-					Accept: "application/json",
-				}),
+				body: JSON.stringify(data),
 			}
 		);
 		const result = await response.json();

@@ -10,15 +10,20 @@ export const createSearchIndex: (
 	documents: any[]
 ) => Promise<EnqueuedTask> = async (indexUid, documents) => {
 	const response = await client.index(indexUid).addDocuments(documents);
-	console.log(response);
 	return response;
 };
 
 export const getSearchData: (
 	indexUid: string,
-	searchQuery: string
+	searchQuery: string | null
 ) => Promise<SearchResponse> = async (indexUid, searchQuery) => {
 	const response = await client.index(indexUid).search(searchQuery);
-	console.log(response);
+	return response;
+};
+
+export const deleteAllDocs: (
+	indexUid: string
+) => Promise<EnqueuedTask> = async (indexUid) => {
+	const response = await client.index(indexUid).deleteAllDocuments();
 	return response;
 };
