@@ -5,6 +5,7 @@ import SBInput from "./atoms/SBInput";
 import SBTextarea from "./atoms/SBTextarea";
 import { Button } from "@nextui-org/button";
 import { config } from "@/config";
+import {toast} from "sonner";
 
 const InsertForm = () => {
 	const onSubmit: SubmitHandler<any> = async (data, event) => {
@@ -16,7 +17,7 @@ const InsertForm = () => {
 			}
 		);
 		const result = await response.json();
-		console.log(result);
+		if(result.statusCode === 200) toast("Successfully added item");
 		event?.target.reset();
 	};
 

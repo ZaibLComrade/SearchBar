@@ -6,6 +6,7 @@ import { Providers } from "./providers";
 
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/Navbar";
+import {Toaster} from "sonner";
 
 export const metadata: Metadata = {
 	icons: {
@@ -43,6 +44,7 @@ export default function RootLayout({
 							{children}
 						</main>
 					</div>
+					<Toaster/>
 				</Providers>
 			</body>
 		</html>

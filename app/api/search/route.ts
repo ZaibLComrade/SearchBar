@@ -11,7 +11,7 @@ export const POST = async (req: NextRequest) => {
 
 	return NextResponse.json({
 		success: true,
-		successCode: 200,
+		statusCode: 200,
 		message: "Successfully posted data",
 		data: res,
 	});
