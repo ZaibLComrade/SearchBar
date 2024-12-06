@@ -35,5 +35,3 @@ export const GET = async (req: NextRequest) => {
 		data: res.hits,
 	});
 };
-
-
