@@ -1,14 +1,12 @@
 "use client";
-import { SubmitHandler, useForm } from "react-hook-form";
-import SBForm from "./atoms/SBForm";
-import SBInput from "./atoms/SBInput";
+import { useForm } from "react-hook-form";
 import { SearchIcon } from "./icons";
 import { config } from "@/config";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Divider } from "@nextui-org/divider";
 import { trancateParagraph } from "@/utils/trancateParagraph";
 import { Input } from "@nextui-org/input";
+import useDebounce from "@/hooks/useDebounce";
 
 interface Item {
 	id: string;
@@ -19,7 +17,22 @@ interface Item {
 const SearchBar = () => {
 	const [searchResult, setSearchResult] = useState<Item[]>([]);
 	const { register, watch } = useForm();
-	console.log(watch())
+	const { searchTerm } = useDebounce(watch());
+
+	useEffect(() => {
+		const getSearchResults = async () => {
+			fetch(`${config.server_url}/api/search?q=${searchTerm}`)
+				.then((res) => res.json())
+				.then((result) => setSearchResult(result.data || []))
+				.catch(err => console.error(err));
+		};
+
+		if (searchTerm) {
+			getSearchResults();
+		} else {
+			setSearchResult([]);
+		}
+	}, [searchTerm]);
 
 	return (
 		<div className="flex flex-col items-center justify-center w-full max-w-md gap-[2px]">
